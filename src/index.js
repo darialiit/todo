@@ -11,7 +11,7 @@ const projectsLog = [];
 function createProject(name) {
   const newProject = new Project(name);
   projectsLog.push(newProject);
-  console.log(projectsLog);
+  //console.log(projectsLog);
   renderProject(newProject);
 }
 
@@ -24,8 +24,30 @@ function renderProject(project) {
 }
 
 const btnAdd = document.querySelector('#add-project');
+const formholder = document.querySelector('.formholder');
+
+function switchVisability(element) {
+  if (element.classList.contains('hidden')) {
+    element.classList.remove('hidden');
+  } else {
+    element.classList.add('hidden');
+  }
+}
 
 btnAdd.addEventListener('click', () => {
-  const answer = prompt('What is the name of the project?');
-  createProject(answer);
+  switchVisability(formholder);
+  switchVisability(btnAdd);
+});
+
+const submitAddProject = document.querySelector('#addProjectBtn');
+const formAddProject = document.querySelector('#addProjectForm');
+
+submitAddProject.addEventListener('click', (e) => {
+  e.preventDefault();
+  const answer = document.querySelector('#projectName');
+  const newProjectName = answer.value;
+  createProject(newProjectName);
+  switchVisability(formholder);
+  switchVisability(btnAdd);
+  formAddProject.reset();
 });
