@@ -14,3 +14,48 @@ body {
   display: grid;
   grid-template-columns: 1fr 3fr;
 }
+
+.projectsTitle {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.project {
+  padding: 6px 10px;
+  margin-top: 4px;
+}
+
+.project::before {
+  background-image: url(folder.png);
+  content: '';
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  margin-right: 12px;
+  background-size: cover;
+}
+
+.project:hover {
+  border-radius: 5px;
+  background-color: #e9e9e9;
+  cursor: pointer;
+}
+
+#add-project {
+  margin-top: 20px;
+  width: 200px;
+  border-radius: 5px;
+  background-color: #e9e9e9;
+  cursor: pointer;
+  padding: 6px 10px;
+}
+
+/* form to add a new Porject */
+
+#addProjectForm {
+  display: flex;
+  flex-direction: column;
+  background-color: red;
+  font-family: 'Poppins';
+  font-size: 18px;
+}
