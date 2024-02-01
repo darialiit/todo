@@ -18,9 +18,30 @@ body {
   margin: 20px;
 }
 
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+h1 {
+  font-size: 30px;
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Navigation */
 .main {
   display: grid;
   grid-template-columns: 1fr 3fr;
+}
+
+.folders ul {
+  list-style-type: none;
 }
 
 .projectsTitle {
@@ -31,6 +52,8 @@ body {
 .project {
   padding: 6px 10px;
   margin-top: 4px;
+  display: grid;
+  grid-template-columns: 1fr 10fr 1fr;
 }
 
 .project::before {
@@ -49,6 +72,11 @@ body {
   cursor: pointer;
 }
 
+.imgMore {
+  width: 30px;
+  height: 30px;
+}
+
 #add-project {
   margin-top: 20px;
   width: 200px;
@@ -58,13 +86,12 @@ body {
   padding: 6px 10px;
 }
 
-/* form to add a new Porject */
-
+/* Form to add and edit a new project */
 #addProjectForm {
   display: flex;
   flex-direction: column;
   border-radius: 5px;
-  margin-top: 20px;
+  margin-top: 5px;
 }
 
 .buttons button {
@@ -89,28 +116,81 @@ button:hover {
   margin-bottom: 10px;
 }
 
-#addProjectBtn {
+#addProjectBtn,
+#editProjectBtn {
   background-color: var(--my-green);
   color: white;
 }
 
-#cancelProjectBtn {
+#cancelProjectBtn,
+#cancelEditProjectBtn {
   background-color: var(--my-red);
   color: white;
 }
 
-#addProjectForm input {
+#addProjectForm input,
+#editProjectForm input {
   border: 1px solid var(--btn-bord);
   border-radius: 5px;
-  padding: 4px 6px;
+  padding: 2px 6px;
 }
 
-.formholder {
+#folderImg {
+  width: 20px;
+  height: 20px;
+  margin-right: 12px;
+  margin-left: 5px;
+}
+
+.wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.formholder,
+.formholderEdit {
   background-color: var(--btn-back);
   border-radius: 5px;
   padding: 4px 6px;
 }
 
+/* Hidden Elements */
 .hidden {
-  display: none;
+  display: none !important;
+}
+
+/* Edit and Delete Projects element */
+.projectMore button {
+  border: none;
+  background-color: var(--btn-back);
+  border-radius: 5px;
+}
+
+.projectMore button:hover {
+  border: none;
+  background-color: var(--btn-back-hov);
+}
+
+.projectMore {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 70px;
+  background-color: var(--btn-back);
+  padding: 4px 6px;
+  border: 1px solid var(--btn-bord);
+  border-radius: 5px;
+  position: absolute;
+}
+
+/* Content page */
+.projectNameDisplayed {
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+  padding: 20px 70px;
+  font-size: 24px;
+  border: 2px solid var(--my-green);
+  border-radius: 5px;
+  margin-bottom: 30px;
 }

@@ -26,21 +26,83 @@
           </ul>
         </div>
         <div class="projectsTitle">Projects</div>
-        <div class="project">First project</div>
-        <div class="project">First project</div>
-        <div class="projects"></div>
+
+        <div class="projects">
+          <div class="project">
+            First project
+            <img
+              class="imgMore"
+              src="/home/darialaia/repos/todo/src/more.png"
+              alt="three dots meaning addicional information"
+            />
+          </div>
+          <div class="project">
+            Second project
+            <img
+              class="imgMore"
+              src="/home/darialaia/repos/todo/src/more.png"
+              alt="three dots meaning addicional information"
+            />
+          </div>
+          <div class="project">
+            Forth
+            <img
+              class="imgMore"
+              src="/home/darialaia/repos/todo/src/more.png"
+              alt="three dots meaning addicional information"
+            />
+          </div>
+
+          <div class="projectMore hidden">
+            <button id="projectEditBtn">Edit</button>
+            <button id="projectDeleteBtn">Delete</button>
+          </div>
+        </div>
+
+        <div class="formholderEdit hidden">
+          <form id="editProjectForm">
+            <div class="wrapper">
+              <img
+                src="/home/darialaia/repos/todo/src/folder.png"
+                alt="a forder icon"
+                id="folderImg"
+              />
+              <input
+                type="text"
+                id="projectNameEdit"
+                placeholder="Project name"
+              />
+            </div>
+            <div class="buttons">
+              <button type="submit" id="editProjectBtn">Edit</button>
+              <button id="cancelEditProjectBtn">Cancel</button>
+            </div>
+          </form>
+        </div>
+
         <div class="formholder hidden">
           <form id="addProjectForm">
-            <input type="text" id="projectName" placeholder="Project name" />
+            <div class="wrapper">
+              <img
+                src="/home/darialaia/repos/todo/src/folder.png"
+                alt="a forder icon"
+                id="folderImg"
+              />
+              <input type="text" id="projectName" placeholder="Project name" />
+            </div>
             <div class="buttons">
               <button type="submit" id="addProjectBtn">Add</button>
               <button id="cancelProjectBtn">Cancel</button>
             </div>
           </form>
         </div>
+
         <div id="add-project">+ Add project</div>
       </div>
-      <div class="container">container</div>
+      <div class="container">
+        <div class="projectNameDisplayed">First Project</div>
+        <div class="tasksContainer">tesks</div>
+      </div>
     </div>
 
     <div class="footer">
