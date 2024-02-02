@@ -6,8 +6,6 @@ export default function TaskLogic() {
       this.name = name;
       this.date = date;
       this.description = description;
-      this.priority = false;
-      this.status = false;
       this.project = 'default';
     }
   }
@@ -64,8 +62,9 @@ export default function TaskLogic() {
 
   const container = document.querySelector('.container');
   const formAddTast = document.querySelector('.formholderAddTask');
+  const formTaskEdit = document.querySelector('.formTaskEdit');
 
-  function markImportant(star) {
+  function switchImportant(star) {
     if (star.classList.contains('starred')) {
       star.classList.remove('starred');
       star.src = '/home/darialaia/repos/todo/src/star.png';
@@ -75,12 +74,79 @@ export default function TaskLogic() {
     }
   }
 
+  function switchComplete(task) {
+    if (task.classList.contains('checked')) {
+      task.classList.remove('checked');
+    } else {
+      task.classList.add('checked');
+    }
+  }
+
+  function addTaskMarker(task) {
+    if (task.classList.contains('taskMarker')) {
+      task.classList.remove('taskMarker');
+    } else {
+      task.classList.add('taskMarker');
+    }
+  }
+
+  function removePreviousTMarks() {
+    const allMarked = document.querySelectorAll('.taskMarker');
+
+    allMarked.forEach((mark) => {
+      mark.classList.remove('taskMarker');
+    });
+  }
+
+  const taskMoreDiv = document.querySelector('.taskMore');
+  const editTaskForm = document.querySelector('#editTaskForm');
+  const addTaskForm = document.querySelector('#addTaskForm');
+
+  function getTDivPosition(task) {
+    const yAxis = task.getBoundingClientRect().y;
+    const xAxis = task.getBoundingClientRect().right;
+    taskMoreDiv.style.top = `${yAxis + window.scrollY}px`;
+    taskMoreDiv.style.left = `${xAxis + window.scrollX}px`;
+  }
+
+  function editElement(toEdit) {
+    switchVisability(formTaskEdit);
+    switchVisability(toEdit);
+    const toEditContent = toEdit.firstChild.textContent;
+    const projectNameEdit = document.querySelector('#taskNameEdit');
+    toEdit.parentNode.insertBefore(formTaskEdit, toEdit.nextSibling);
+    projectNameEdit.placeholder = toEditContent;
+  }
+
+  function renderEditedTask(currentDiv) {
+    const currentName = currentDiv.querySelector('.taskNameDisplay');
+    const currentDate = currentDiv.querySelector('.dateDisplay');
+    const currentDesc = currentDiv.querySelector('.taskDescriptionDisplay');
+
+    const newName = document.querySelector('#taskNameEdit').value;
+    const newDate = document.querySelector('#taskDateEdit').value;
+    const newDesc = document.querySelector('#taskDescriptionEdit').value;
+
+    currentName.textContent = newName;
+    currentDate.textContent = newDate;
+    currentDesc.textContent = newDesc;
+  }
+
   container.addEventListener('click', (e) => {
     if (e.target.id === 'addTask') {
       switchVisability(formAddTast);
     }
     if (e.target.classList.contains('star')) {
-      markImportant(e.target);
+      switchImportant(e.target);
+    }
+    if (e.target.classList.contains('imgMore')) {
+      getTDivPosition(e.target.parentNode);
+      switchVisability(taskMoreDiv);
+      removePreviousTMarks();
+      addTaskMarker(e.target.parentNode);
+    } else if (e.target.classList.value !== 'imgMore') {
+      hideElement(taskMoreDiv);
+      // removePreviousMarks();
     }
     if (e.target.id === 'addTaskBtn') {
       e.preventDefault();
@@ -89,6 +155,41 @@ export default function TaskLogic() {
       const descPassed = document.querySelector('#taskDescription').value;
       createTask(namePassed, datePassed, descPassed);
       switchVisability(formAddTast);
+      addTaskForm.reset();
+    }
+    if (e.target.id === 'cancelTaskBtn') {
+      e.preventDefault();
+      switchVisability(formAddTast);
+      addTaskForm.reset();
+    }
+    if (e.target.id === 'taskDeleteBtn') {
+      const elementToDelete = document.querySelector('.taskMarker');
+      deleteElement(elementToDelete);
+      hideElement(taskMoreDiv);
+    }
+    if (e.target.id === 'taskEditBtn') {
+      e.preventDefault();
+      const elementToEdit = document.querySelector('.taskMarker');
+      editElement(elementToEdit);
+      hideElement(taskMoreDiv);
+    }
+    if (e.target.id === 'editTaskBtn') {
+      e.preventDefault();
+      const currentDiv = document.querySelector('.taskMarker');
+      renderEditedTask(currentDiv);
+      switchVisability(currentDiv);
+      hideElement(formTaskEdit);
+      editTaskForm.reset();
+    }
+    if (e.target.id === 'cancelEditTaskBtn') {
+      e.preventDefault();
+      const currentDiv = document.querySelector('.taskMarker');
+      switchVisability(currentDiv);
+      switchVisability(formTaskEdit);
+      editTaskForm.reset();
+    }
+    if (e.target.classList.contains('check')) {
+      switchComplete(e.target.parentNode);
     }
   });
 }

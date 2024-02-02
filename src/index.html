@@ -19,10 +19,10 @@
       <div class="nav">
         <div class="folders">
           <ul>
-            <li>All</li>
-            <li>Today</li>
-            <li>Finished</li>
-            <li>Starred</li>
+            <li id="all">All</li>
+            <li id="today">Today</li>
+            <li id="finished">Finished</li>
+            <li id="starred">Starred</li>
           </ul>
         </div>
         <div class="projectsTitle">Projects</div>
@@ -143,11 +143,15 @@
               alt="three dots meaning addicional information"
             />
           </div>
+          <div class="taskMore hidden">
+            <button id="taskEditBtn">Edit</button>
+            <button id="taskDeleteBtn">Delete</button>
+          </div>
         </div>
 
         <div class="formholderAddTask hidden">
           <form id="addTaskForm">
-            <input type="text" id="taskName" placeholder="Name" required />
+            <input type="text" id="taskName" placeholder="Name" />
             <input
               type="date"
               id="taskDate"
@@ -163,6 +167,30 @@
             <div class="buttons">
               <button type="submit" id="addTaskBtn">Add</button>
               <button id="cancelTaskBtn">Cancel</button>
+            </div>
+          </form>
+        </div>
+
+        <!-- editing here -->
+        <div class="formTaskEdit hidden">
+          <form id="editTaskForm">
+            <input type="text" id="taskNameEdit" placeholder="Name" required />
+            <input
+              type="date"
+              id="taskDateEdit"
+              min="2024-01-20"
+              max="2030-08-31"
+            />
+            <input
+              type="text"
+              id="taskDescriptionEdit"
+              placeholder="Description"
+              maxlength="200"
+            />
+
+            <div class="buttons">
+              <button type="submit" id="editTaskBtn">Edit</button>
+              <button id="cancelEditTaskBtn">Cancel</button>
             </div>
           </form>
         </div>

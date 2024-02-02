@@ -74,7 +74,7 @@ export default function ProjectLogic() {
     });
   }
 
-  function addProjectmarket(project) {
+  function addProjectMarker(project) {
     if (project.classList.contains('projectMarker')) {
       project.classList.remove('projectMarker');
     } else {
@@ -118,7 +118,7 @@ export default function ProjectLogic() {
       getPDivPosition(e.target.parentNode);
       switchVisability(projectMoreDiv);
       removePreviousMarks();
-      addProjectmarket(e.target.parentNode);
+      addProjectMarker(e.target.parentNode);
     }
     if (e.target.id === 'editProjectBtn') {
       e.preventDefault();

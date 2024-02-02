@@ -1,7 +1,11 @@
 :root {
-  --my-green: #82d943;
   --my-red: #bf4949;
-  --btn-back: #f2f2f2;
+
+  --btn-back: #ad7be9;
+  --btn-back2: #bfdce5;
+  --back-border: #eeeeee;
+  --back-nav: #f9f9f9;
+
   --btn-bord: #cfcfcf;
   --btn-back-hov: #cfcfcf;
 }
@@ -14,40 +18,86 @@
 
 body {
   display: grid;
-  grid-template-rows: 1fr 7fr 1fr;
+  grid-template-rows: 1fr 7fr 60px;
   height: 100vh;
-  margin: 20px;
+  /* margin: 10px 80px; */
 }
 
 .header {
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: #14274e;
 }
 
 h1 {
-  font-size: 30px;
+  font-size: 34px;
+  color: white;
 }
 
 .footer {
   display: flex;
   justify-content: center;
   align-items: center;
+  color: #555555;
+  border-top: 1px solid var(--back-border);
+}
+
+a {
+  color: #555555;
+  margin-left: 5px;
 }
 
 /* Navigation */
 .main {
   display: grid;
   grid-template-columns: 1fr 3fr;
+  gap: 50px;
+}
+
+.nav {
+  border-right: 1px solid var(--back-border);
+  background-color: var(--back-nav);
+  padding: 50px 40px;
 }
 
 .folders ul {
   list-style-type: none;
 }
 
+li::before {
+  background-image: url(folder.png);
+  content: '';
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  margin-right: 12px;
+  background-size: cover;
+}
+
+#all::before {
+  background-image: url(starred.png);
+}
+
+#today::before {
+  background-image: url(starred.png);
+}
+
+#finished::before {
+  background-image: url(starred.png);
+}
+
+#starred::before {
+  background-image: url(starred.png);
+}
+
+.folders {
+  height: 30%;
+  border-bottom: 1px solid var(--back-border);
+}
+
 .projectsTitle {
-  font-size: 22px;
-  font-weight: 700;
+  font-size: 16px;
 }
 
 .project {
@@ -81,11 +131,14 @@ h1 {
 
 #add-project {
   margin-top: 20px;
-  width: 200px;
+  width: 150px;
   border-radius: 5px;
-  background-color: #e9e9e9;
+  background-color: var(--btn-back);
+  color: white;
   cursor: pointer;
   padding: 6px 10px;
+  display: flex;
+  justify-content: center;
 }
 
 /* Form to add and edit a new project */
@@ -102,8 +155,6 @@ h1 {
   padding: 4px 6px;
   min-width: 80px;
   border-radius: 5px;
-  border: 1px solid var(--btn-bord);
-  background-color: var(--btn-back);
 }
 
 button:hover {
@@ -119,15 +170,19 @@ button:hover {
 }
 
 #addProjectBtn,
-#editProjectBtn {
-  background-color: var(--my-green);
+#editProjectBtn,
+#addTaskBtn {
+  background-color: var(--btn-back);
   color: white;
+  border: none;
 }
 
 #cancelProjectBtn,
-#cancelEditProjectBtn {
-  background-color: var(--my-red);
+#cancelEditProjectBtn,
+#cancelTaskBtn {
+  background-color: var(--btn-back2);
   color: white;
+  border: none;
 }
 
 #addProjectForm input,
@@ -151,7 +206,7 @@ button:hover {
 
 .formholder,
 .formholderEdit {
-  background-color: var(--btn-back);
+  /* background-color: var(--btn-back); */
   border-radius: 5px;
   padding: 4px 6px;
 }
@@ -162,18 +217,21 @@ button:hover {
 }
 
 /* Edit and Delete Projects element */
-.projectMore button {
+.projectMore button,
+.taskMore button {
   border: none;
   background-color: var(--btn-back);
   border-radius: 5px;
 }
 
-.projectMore button:hover {
+.projectMore button:hover,
+.taskMore button:hover {
   border: none;
   background-color: var(--btn-back-hov);
 }
 
-.projectMore {
+.projectMore,
+.taskMore {
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -191,11 +249,18 @@ button:hover {
   justify-content: space-between;
   align-items: center;
   padding: 20px 70px;
-  border: 2px solid var(--my-green);
+  border: 2px solid var(--btn-back);
   border-radius: 5px;
   margin-bottom: 30px;
 }
 
+#addTask {
+  background-color: var(--btn-back);
+  border: none;
+  color: white;
+  padding: 6px 10px;
+  border-radius: 5px;
+}
 /* Tasks stylying */
 
 .tasksContainer {
@@ -219,6 +284,7 @@ button:hover {
   flex-direction: column;
 }
 
-.star:hover {
+.star:hover,
+.imgMore:hover {
   cursor: pointer;
 }
