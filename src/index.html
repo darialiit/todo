@@ -100,8 +100,72 @@
         <div id="add-project">+ Add project</div>
       </div>
       <div class="container">
-        <div class="projectNameDisplayed">First Project</div>
-        <div class="tasksContainer">tesks</div>
+        <div class="projectHeader">
+          <p class="projectNameDisplayed">First Project</p>
+          <button id="addTask">Add Task</button>
+        </div>
+        <div class="tasksContainer">
+          <div class="task">
+            <input class="check" type="checkbox" />
+            <div class="wrapperName">
+              <p class="taskNameDisplay">The Task</p>
+              <p class="taskDescriptionDisplay">Description here longer one</p>
+            </div>
+            <img
+              class="star"
+              src="/home/darialaia/repos/todo/src/star.png"
+              alt="not filled star"
+            />
+            <div class="dateDisplay">01-02-2024</div>
+            <img
+              class="imgMore"
+              src="/home/darialaia/repos/todo/src/more.png"
+              alt="three dots meaning addicional information"
+            />
+          </div>
+          <div class="task">
+            <input class="check" type="checkbox" />
+            <div class="wrapperName">
+              <p class="taskNameDisplay">Second Task</p>
+              <p class="taskDescriptionDisplay">
+                Description here longer one 2
+              </p>
+            </div>
+            <img
+              class="star"
+              src="/home/darialaia/repos/todo/src/star.png"
+              alt="not filled star"
+            />
+            <div class="dateDisplay">01-02-2024</div>
+            <img
+              class="imgMore"
+              src="/home/darialaia/repos/todo/src/more.png"
+              alt="three dots meaning addicional information"
+            />
+          </div>
+        </div>
+
+        <div class="formholderAddTask hidden">
+          <form id="addTaskForm">
+            <input type="text" id="taskName" placeholder="Name" required />
+            <input
+              type="date"
+              id="taskDate"
+              min="2024-01-20"
+              max="2030-08-31"
+            />
+            <input
+              type="text"
+              id="taskDescription"
+              placeholder="Description"
+              maxlength="200"
+            />
+            <div class="buttons">
+              <button type="submit" id="addTaskBtn">Add</button>
+              <button id="cancelTaskBtn">Cancel</button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
 
