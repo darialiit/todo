@@ -9,7 +9,7 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap"
     />
-  <script defer src="main.bundle.js?1f5a979652dd5d408655"></script></head>
+  <script defer src="main.bundle.js?fce505c7c530042519e4"></script></head>
   <body>
     <div class="header">
       <h1>My to-do list</h1>
@@ -18,12 +18,10 @@
     <div class="main">
       <div class="nav">
         <div class="folders">
-          <ul>
-            <li id="all">All</li>
-            <li id="today">Today</li>
-            <li id="finished">Finished</li>
-            <li id="starred">Starred</li>
-          </ul>
+          <div class="folder" id="all">All</div>
+          <div class="folder" id="today">Today</div>
+          <div class="folder" id="finished">Finished</div>
+          <div class="folder" id="starred">Starred</div>
         </div>
         <div class="projectsTitle">Projects</div>
 
@@ -149,26 +147,28 @@
           </div>
         </div>
 
-        <div class="formholderAddTask hidden">
-          <form id="addTaskForm">
-            <input type="text" id="taskName" placeholder="Name" />
-            <input
-              type="date"
-              id="taskDate"
-              min="2024-01-20"
-              max="2030-08-31"
-            />
-            <input
-              type="text"
-              id="taskDescription"
-              placeholder="Description"
-              maxlength="200"
-            />
-            <div class="buttons">
-              <button type="submit" id="addTaskBtn">Add</button>
-              <button id="cancelTaskBtn">Cancel</button>
-            </div>
-          </form>
+        <div class="overlay hidden">
+          <div class="formholderAddTask">
+            <form id="addTaskForm">
+              <input type="text" id="taskName" placeholder="Name" />
+              <input
+                type="date"
+                id="taskDate"
+                min="2024-01-20"
+                max="2030-08-31"
+              />
+              <input
+                type="text"
+                id="taskDescription"
+                placeholder="Description"
+                maxlength="200"
+              />
+              <div class="buttons">
+                <button type="submit" id="addTaskBtn">Add</button>
+                <button id="cancelTaskBtn">Cancel</button>
+              </div>
+            </form>
+          </div>
         </div>
 
         <!-- editing here -->

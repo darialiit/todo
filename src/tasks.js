@@ -61,7 +61,7 @@ export default function TaskLogic() {
   }
 
   const container = document.querySelector('.container');
-  const formAddTast = document.querySelector('.formholderAddTask');
+  const addTastOverlay = document.querySelector('.overlay');
   const formTaskEdit = document.querySelector('.formTaskEdit');
 
   function switchImportant(star) {
@@ -134,7 +134,7 @@ export default function TaskLogic() {
 
   container.addEventListener('click', (e) => {
     if (e.target.id === 'addTask') {
-      switchVisability(formAddTast);
+      switchVisability(addTastOverlay);
     }
     if (e.target.classList.contains('star')) {
       switchImportant(e.target);
@@ -154,12 +154,12 @@ export default function TaskLogic() {
       const datePassed = document.querySelector('#taskDate').value;
       const descPassed = document.querySelector('#taskDescription').value;
       createTask(namePassed, datePassed, descPassed);
-      switchVisability(formAddTast);
+      switchVisability(addTastOverlay);
       addTaskForm.reset();
     }
     if (e.target.id === 'cancelTaskBtn') {
       e.preventDefault();
-      switchVisability(formAddTast);
+      switchVisability(addTastOverlay);
       addTaskForm.reset();
     }
     if (e.target.id === 'taskDeleteBtn') {

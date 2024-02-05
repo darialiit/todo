@@ -107,6 +107,7 @@ export default function ProjectLogic() {
       const elementToEdit = document.querySelector('.projectMarker');
       editElement(elementToEdit);
       switchVisability(projectMoreDiv);
+      switchVisability(btnAdd);
     } else if (e.target.classList.value !== 'imgMore') {
       hideElement(projectMoreDiv);
       // removePreviousMarks();
@@ -128,6 +129,7 @@ export default function ProjectLogic() {
       switchVisability(currentDiv);
       switchVisability(formholderEdit);
       formEditProject.reset();
+      switchVisability(btnAdd);
     }
     if (e.target.id === 'cancelEditProjectBtn') {
       e.preventDefault();
@@ -135,6 +137,7 @@ export default function ProjectLogic() {
       switchVisability(currentDiv);
       switchVisability(formholderEdit);
       formEditProject.reset();
+      switchVisability(btnAdd);
     }
     if (e.target.classList.contains('project')) {
       displayProjectName(e.target);
