@@ -186,7 +186,8 @@ button:hover {
 
 #addProjectBtn,
 #editProjectBtn,
-#addTaskBtn {
+#addTaskBtn,
+#editTaskBtn {
   background-color: var(--btn-back);
   color: white;
   border: none;
@@ -194,7 +195,8 @@ button:hover {
 
 #cancelProjectBtn,
 #cancelEditProjectBtn,
-#cancelTaskBtn {
+#cancelTaskBtn,
+#cancelEditTaskBtn {
   background-color: var(--btn-back2);
   color: white;
   border: none;
@@ -205,6 +207,7 @@ button:hover {
   border: 2px solid var(--main);
   border-radius: 5px;
   padding: 2px 6px;
+  width: 75%;
 }
 
 #folderImg {
@@ -221,7 +224,6 @@ button:hover {
 
 .formholder,
 .formholderEdit {
-  /* background-color: var(--btn-back); */
   border-radius: 5px;
   padding: 4px 6px;
 }
@@ -235,14 +237,15 @@ button:hover {
 .projectMore button,
 .taskMore button {
   border: none;
-  background-color: var(--btn-back);
+  background-color: var(--main);
   border-radius: 5px;
+  color: white;
 }
 
 .projectMore button:hover,
 .taskMore button:hover {
   border: none;
-  background-color: var(--btn-back-hov);
+  background-color: #394867;
 }
 
 .projectMore,
@@ -251,9 +254,9 @@ button:hover {
   flex-direction: column;
   gap: 4px;
   width: 70px;
-  background-color: var(--btn-back);
+  background-color: var(--main);
   padding: 4px 6px;
-  border: 1px solid var(--btn-bord);
+  border: 1px solid var(--back-border);
   border-radius: 5px;
   position: absolute;
 }
@@ -300,7 +303,7 @@ button:hover {
   gap: 40px;
   align-items: center;
   padding: 8px 10px;
-  background-color: #eeeeee;
+  background-color: #f5f4f4;
   border-radius: 5px;
   margin-top: 10px;
 }
@@ -368,23 +371,56 @@ button:hover {
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: white;
-  text-align: center;
   border-radius: 10px;
-  padding: 50px 40px;
-  width: 500px;
+  padding-top: 40px;
+  padding-right: 50px;
+  padding-left: 50px;
+  padding-bottom: 20px;
   display: grid;
-  grid-template-columns: 2fr 1fr;
+  grid-template-columns: 250px 150px;
   grid-template-rows: 40px 3fr 1fr;
   gap: 10px;
 }
 
+#editTaskForm {
+  display: grid;
+  grid-template-columns: 5fr 210px;
+  grid-template-rows: 40px 40px 1fr;
+  gap: 10px;
+  padding: 20px 20px;
+  padding-bottom: 10px;
+  justify-content: center;
+  background-color: #f5f4f4;
+  margin-top: 10px;
+  border-radius: 5px;
+}
+
 #taskDescription,
-#addTaskForm .buttons {
+#addTaskForm .buttons,
+#taskDescriptionEdit,
+#editTaskForm .buttons {
   grid-column: span 2;
 }
 
-#addTaskForm input {
+#taskDescription {
+  max-width: 100%;
+  max-height: 200px;
+}
+
+#addTaskForm input,
+#addTaskForm textarea,
+#editTaskForm input {
   border-radius: 5px;
   border: 1px solid rgb(218, 218, 218);
   padding: 6px 10px;
+}
+
+#addTaskForm input::placeholder,
+#addTaskForm textarea::placeholder {
+  color: grey;
+}
+
+input[type='date'] {
+  font-size: 15px;
+  color: grey;
 }

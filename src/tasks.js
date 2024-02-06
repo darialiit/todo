@@ -112,10 +112,17 @@ export default function TaskLogic() {
   function editElement(toEdit) {
     switchVisability(formTaskEdit);
     switchVisability(toEdit);
-    const toEditContent = toEdit.firstChild.textContent;
-    const projectNameEdit = document.querySelector('#taskNameEdit');
     toEdit.parentNode.insertBefore(formTaskEdit, toEdit.nextSibling);
-    projectNameEdit.placeholder = toEditContent;
+    const toEditContent = toEdit.querySelector('.taskNameDisplay').textContent;
+    const taskNameEdit = document.querySelector('#taskNameEdit');
+    taskNameEdit.value = toEditContent;
+    // TODO: add the same for the Date
+
+    const toEditDesc = toEdit
+      .querySelector('.taskDescriptionDisplay')
+      .textContent.trim();
+    const taskDescEdit = document.querySelector('#taskDescriptionEdit');
+    taskDescEdit.value = toEditDesc;
   }
 
   function renderEditedTask(currentDiv) {

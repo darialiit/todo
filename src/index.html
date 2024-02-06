@@ -69,6 +69,7 @@
                 type="text"
                 id="projectNameEdit"
                 placeholder="Project name"
+                required
               />
             </div>
             <div class="buttons">
@@ -86,7 +87,12 @@
                 alt="a forder icon"
                 id="folderImg"
               />
-              <input type="text" id="projectName" placeholder="Project name" />
+              <input
+                type="text"
+                id="projectName"
+                placeholder="Project name"
+                required
+              />
             </div>
             <div class="buttons">
               <button type="submit" id="addProjectBtn">Add</button>
@@ -150,19 +156,25 @@
         <div class="overlay hidden">
           <div class="formholderAddTask">
             <form id="addTaskForm">
-              <input type="text" id="taskName" placeholder="Name" />
+              <input
+                type="text"
+                id="taskName"
+                placeholder="Task name"
+                required
+              />
               <input
                 type="date"
                 id="taskDate"
                 min="2024-01-20"
                 max="2030-08-31"
               />
-              <input
-                type="text"
+              <textarea
                 id="taskDescription"
-                placeholder="Description"
-                maxlength="200"
-              />
+                placeholder="Task description (keep it short)"
+                cols="1"
+                rows="3"
+                maxlength="120"
+              ></textarea>
               <div class="buttons">
                 <button type="submit" id="addTaskBtn">Add</button>
                 <button id="cancelTaskBtn">Cancel</button>
@@ -174,7 +186,7 @@
         <!-- editing here -->
         <div class="formTaskEdit hidden">
           <form id="editTaskForm">
-            <input type="text" id="taskNameEdit" placeholder="Name" required />
+            <input type="text" id="taskNameEdit" required />
             <input
               type="date"
               id="taskDateEdit"
@@ -187,7 +199,6 @@
               placeholder="Description"
               maxlength="200"
             />
-
             <div class="buttons">
               <button type="submit" id="editTaskBtn">Edit</button>
               <button id="cancelEditTaskBtn">Cancel</button>

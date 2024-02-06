@@ -85,10 +85,10 @@ export default function ProjectLogic() {
   function editElement(toEdit) {
     switchVisability(formholderEdit);
     switchVisability(toEdit);
-    const toEditContent = toEdit.firstChild.textContent;
+    const toEditContent = toEdit.firstChild.textContent.trim();
     const projectNameEdit = document.querySelector('#projectNameEdit');
     toEdit.parentNode.insertBefore(formholderEdit, toEdit.nextSibling);
-    projectNameEdit.placeholder = toEditContent;
+    projectNameEdit.value = toEditContent;
   }
 
   function displayProjectName(chosenProject) {
