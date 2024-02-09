@@ -1,21 +1,33 @@
+import { format, parseISO } from 'date-fns';
 import { switchVisability, hideElement, deleteElement } from './common';
 
 export default function TaskLogic() {
   class Task {
-    constructor(name, date, description) {
+    static latestId = 0;
+
+    constructor(name, date, description, project) {
+      // eslint-disable-next-line no-plusplus
+      Task.latestId++;
+      this.id = Task.latestId;
       this.name = name;
-      this.date = date;
+      this.date = format(parseISO(date), 'MM/dd/yyyy');
       this.description = description;
-      this.project = 'default';
+      this.project = project;
+      this.star = false;
+      this.status = false;
     }
   }
 
-  const firstTask = new Task('First', '01/02/2024', 'Need to do things');
+  const tasksLog = [];
+
+  // const firstTask = new Task('First', '01/02/2024', 'Need to do things');
   const tasksContainer = document.querySelector('.tasksContainer');
 
   function renderTask(task) {
     const divMain = document.createElement('div');
     divMain.classList.add('task');
+    // TODO: add the ID of the task as a class here
+    divMain.classList.add(task.id);
 
     const input = document.createElement('input');
     input.classList.add('check');
@@ -56,15 +68,47 @@ export default function TaskLogic() {
   }
 
   function createTask(name, date, description) {
-    const newTask = new Task(name, date, description);
+    const fromProject = document
+      .querySelector('.projectNameDisplayed')
+      .textContent.trim();
+
+    const newTask = new Task(name, date, description, fromProject);
+    tasksLog.push(newTask);
     renderTask(newTask);
+    console.log(tasksLog);
   }
 
   const container = document.querySelector('.container');
   const addTastOverlay = document.querySelector('.overlay');
   const formTaskEdit = document.querySelector('.formTaskEdit');
 
+  function updateImportanceStatus(taskid) {
+    tasksLog.forEach((task) => {
+      if (task.id === Number(taskid)) {
+        if (task.star) {
+          task.star = false;
+        } else {
+          task.star = true;
+        }
+      }
+    });
+  }
+
+  function updateCheckStatus(taskid) {
+    tasksLog.forEach((task) => {
+      if (task.id === Number(taskid)) {
+        if (task.status) {
+          task.status = false;
+        } else {
+          task.status = true;
+        }
+      }
+    });
+  }
+
   function switchImportant(star) {
+    const [, currentTaskId] = star.parentNode.classList;
+    updateImportanceStatus(currentTaskId);
     if (star.classList.contains('starred')) {
       star.classList.remove('starred');
       star.src = '/home/darialaia/repos/todo/src/star.png';
@@ -75,6 +119,8 @@ export default function TaskLogic() {
   }
 
   function switchComplete(task) {
+    const [, currentTaskId] = task.classList;
+    updateCheckStatus(currentTaskId);
     if (task.classList.contains('checked')) {
       task.classList.remove('checked');
     } else {
@@ -139,6 +185,49 @@ export default function TaskLogic() {
     currentDesc.textContent = newDesc;
   }
 
+  //  folders
+  const folderStarred = document.querySelector('#starred');
+  const folderFinished = document.querySelector('#finished');
+  const folderAll = document.querySelector('#all');
+  const folderToday = document.querySelector('#today');
+
+  folderToday.addEventListener('click', () => {
+    tasksContainer.innerHTML = '';
+    const today = format(new Date(), 'MM/dd/yyyy');
+    const allTodayTasks = tasksLog.filter((task) => task.date === today);
+
+    allTodayTasks.forEach((todayTask) => {
+      renderTask(todayTask);
+    });
+  });
+
+  folderStarred.addEventListener('click', () => {
+    tasksContainer.innerHTML = '';
+    const allStarredTasks = tasksLog.filter((task) => task.star);
+
+    allStarredTasks.forEach((starredTask) => {
+      renderTask(starredTask);
+    });
+  });
+
+  folderFinished.addEventListener('click', () => {
+    tasksContainer.innerHTML = '';
+    const allFinishedTasks = tasksLog.filter((task) => task.status);
+
+    allFinishedTasks.forEach((finishedTask) => {
+      renderTask(finishedTask);
+    });
+  });
+
+  folderAll.addEventListener('click', () => {
+    tasksContainer.innerHTML = '';
+    const allUnFinishedTasks = tasksLog.filter((task) => !task.status);
+
+    allUnFinishedTasks.forEach((task) => {
+      renderTask(task);
+    });
+  });
+
   container.addEventListener('click', (e) => {
     if (e.target.id === 'addTask') {
       switchVisability(addTastOverlay);
@@ -159,6 +248,8 @@ export default function TaskLogic() {
       e.preventDefault();
       const namePassed = document.querySelector('#taskName').value;
       const datePassed = document.querySelector('#taskDate').value;
+
+      // TODO: do sth with the date
       const descPassed = document.querySelector('#taskDescription').value;
       createTask(namePassed, datePassed, descPassed);
       switchVisability(addTastOverlay);
