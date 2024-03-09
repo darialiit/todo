@@ -19,6 +19,7 @@ body {
   display: grid;
   grid-template-rows: 1fr 7fr 60px;
   height: 100vh;
+  overflow: none;
 }
 
 .header {
@@ -57,7 +58,9 @@ a {
 .nav {
   border-right: 1px solid var(--back-border);
   background-color: var(--back-nav);
-  padding: 50px 40px;
+  padding-top: 50px;
+  padding-left: 40px;
+  padding-right: 40px;
 }
 
 .folder {
@@ -113,6 +116,7 @@ a {
 .projects {
   margin-top: 15px;
   overflow: auto;
+  max-height: 230px;
   /* height: 250px; */
 }
 
@@ -296,7 +300,8 @@ button:hover {
 /* Tasks stylying */
 .tasksContainer {
   margin-right: 100px;
-  /* TODO: do it prettier later */
+  max-height: 510px;
+  overflow: auto;
 }
 
 .task {
