@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import { format, parseISO } from 'date-fns';
 import { switchVisability, hideElement, deleteElement } from './common';
 
