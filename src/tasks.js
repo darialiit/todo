@@ -20,18 +20,23 @@ export default function TaskLogic() {
 
   const tasksLog = [];
 
-  // const firstTask = new Task('First', '01/02/2024', 'Need to do things');
   const tasksContainer = document.querySelector('.tasksContainer');
 
   function renderTask(task) {
     const divMain = document.createElement('div');
     divMain.classList.add('task');
-    // TODO: add the ID of the task as a class here
     divMain.classList.add(task.id);
 
     const input = document.createElement('input');
-    input.classList.add('check');
-    input.type = 'checkbox';
+
+    if (task.status === true) {
+      input.classList.add('check');
+      input.type = 'checkbox';
+      input.checked = true;
+    } else {
+      input.classList.add('check');
+      input.type = 'checkbox';
+    }
 
     const divWrapper = document.createElement('div');
     divWrapper.classList.add('wrapperName');
@@ -45,9 +50,16 @@ export default function TaskLogic() {
     divWrapper.appendChild(taskDesc);
 
     const imgStar = document.createElement('img');
-    imgStar.classList.add('star');
-    imgStar.src = '/home/darialaia/repos/todo/src/star.png';
-    imgStar.alt = 'not filled star';
+
+    if (task.star === true) {
+      imgStar.classList.add('star');
+      imgStar.src = '/home/darialaia/repos/todo/src/starred.png';
+      imgStar.alt = ' filled star';
+    } else {
+      imgStar.classList.add('star');
+      imgStar.src = '/home/darialaia/repos/todo/src/star.png';
+      imgStar.alt = 'not filled star';
+    }
 
     const date = document.createElement('div');
     date.classList.add('dateDisplay');
@@ -75,7 +87,6 @@ export default function TaskLogic() {
     const newTask = new Task(name, date, description, fromProject);
     tasksLog.push(newTask);
     renderTask(newTask);
-    console.log(tasksLog);
   }
 
   const container = document.querySelector('.container');
@@ -162,7 +173,6 @@ export default function TaskLogic() {
     const toEditContent = toEdit.querySelector('.taskNameDisplay').textContent;
     const taskNameEdit = document.querySelector('#taskNameEdit');
     taskNameEdit.value = toEditContent;
-    // TODO: add the same for the Date
 
     const toEditDesc = toEdit
       .querySelector('.taskDescriptionDisplay')
@@ -228,6 +238,19 @@ export default function TaskLogic() {
     });
   });
 
+  const projectsDiv = document.querySelector('.projects');
+
+  projectsDiv.addEventListener('click', (project) => {
+    tasksContainer.innerHTML = '';
+    const projectName = project.target.textContent.trim();
+    const tasksOfProject = tasksLog.filter(
+      (task) => task.project === projectName
+    );
+    tasksOfProject.forEach((task) => {
+      renderTask(task);
+    });
+  });
+
   container.addEventListener('click', (e) => {
     if (e.target.id === 'addTask') {
       switchVisability(addTastOverlay);
@@ -242,16 +265,14 @@ export default function TaskLogic() {
       addTaskMarker(e.target.parentNode);
     } else if (e.target.classList.value !== 'imgMore') {
       hideElement(taskMoreDiv);
-      // removePreviousMarks();
     }
     if (e.target.id === 'addTaskBtn') {
       e.preventDefault();
       const namePassed = document.querySelector('#taskName').value;
       const datePassed = document.querySelector('#taskDate').value;
-
-      // TODO: do sth with the date
       const descPassed = document.querySelector('#taskDescription').value;
       createTask(namePassed, datePassed, descPassed);
+
       switchVisability(addTastOverlay);
       addTaskForm.reset();
     }

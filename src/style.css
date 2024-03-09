@@ -112,6 +112,8 @@ a {
 
 .projects {
   margin-top: 15px;
+  overflow: auto;
+  /* height: 250px; */
 }
 
 .project {

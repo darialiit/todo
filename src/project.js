@@ -7,6 +7,20 @@ export default function ProjectLogic() {
     }
   }
 
+  // load from the local storage
+  document.addEventListener('DOMContentLoaded', () => {
+    let projectsOnStorage = localStorage.getItem('project');
+
+    if (projectsOnStorage) {
+      projectsOnStorage = JSON.parse(projectsOnStorage);
+      projectsOnStorage.forEach((project) => {
+        renderProject(project);
+      });
+    }
+  });
+
+  let projectsLog = [];
+
   const projectsDiv = document.querySelector('.projects');
   const btnAdd = document.querySelector('#add-project');
   const formholder = document.querySelector('.formholder');
@@ -29,7 +43,17 @@ export default function ProjectLogic() {
 
   function createProject(name) {
     const newProject = new Project(name);
+    projectsLog.push(newProject);
     renderProject(newProject);
+
+    let projectsOnStorage = localStorage.getItem('project');
+    if (projectsOnStorage) {
+      projectsOnStorage = JSON.parse(projectsOnStorage);
+      projectsOnStorage.push(newProject);
+      localStorage.setItem('project', JSON.stringify(projectsOnStorage));
+    } else {
+      localStorage.setItem('project', JSON.stringify(projectsLog));
+    }
   }
 
   // Open the form to add a new project
@@ -97,11 +121,24 @@ export default function ProjectLogic() {
     display.textContent = chosenName;
   }
 
+  function updateProjectStorage() {
+    const projects = document.querySelectorAll('.project');
+    localStorage.removeItem('project');
+    projectsLog = [];
+
+    projects.forEach((project) => {
+      const newProject = new Project(project.textContent.trim());
+      projectsLog.push(newProject);
+    });
+    localStorage.setItem('project', JSON.stringify(projectsLog));
+  }
+
   window.addEventListener('click', (e) => {
     if (e.target.id === 'projectDeleteBtn') {
       const elementToDelete = document.querySelector('.projectMarker');
       deleteElement(elementToDelete);
       switchVisability(projectMoreDiv);
+      updateProjectStorage();
     } else if (e.target.id === 'projectEditBtn') {
       e.preventDefault();
       const elementToEdit = document.querySelector('.projectMarker');
@@ -110,7 +147,6 @@ export default function ProjectLogic() {
       switchVisability(btnAdd);
     } else if (e.target.classList.value !== 'imgMore') {
       hideElement(projectMoreDiv);
-      // removePreviousMarks();
     }
   });
 
@@ -130,6 +166,7 @@ export default function ProjectLogic() {
       switchVisability(formholderEdit);
       formEditProject.reset();
       switchVisability(btnAdd);
+      updateProjectStorage();
     }
     if (e.target.id === 'cancelEditProjectBtn') {
       e.preventDefault();
